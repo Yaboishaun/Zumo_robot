@@ -4,9 +4,9 @@
 class InertialSensor{
   public:
     InertialSensor(){}
-    turnSensorReset();
-    turnSensorUpdate();
-    turnSensorSetup();
+    Reset();
+    Update();
+    Setup();
     calibrateGyro();
   private:
     const uint turnAngle45;
