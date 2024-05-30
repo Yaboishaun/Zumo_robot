@@ -8,6 +8,7 @@ class InertialSensor{
     Update();
     Setup();
     calibrateGyro();
+    printReadings(uint16_t);
   private:
     const uint turnAngle45;
     const uint turnAngle90;
