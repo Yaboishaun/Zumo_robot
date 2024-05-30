@@ -58,14 +58,20 @@ void Setup()
 
 void calibrateGyro(){
   int32_t total = 0;
-  for (uint16_t i = 0; i < 1024; i++)
-  {
+  for (uint16_t i = 0; i < 1024; ++i){
         while(!imu.gyroDataReady()) {}
     imu.readGyro();
+    printReadings(i);
 
 // add the Z axis reading to the total.
     total += imu.g.z;
   }
   ledYellow(0);
   gyroOffset = total / 1024;
+}
+
+void printReadings(uint16_t i){
+  while (i % 16 =0){
+    Serial.println(imu.g.z);
+  }
 }
