@@ -1,7 +1,6 @@
 #include "LineSensors.h"
 #include <Zumo32U4.h>
 
-// Maak een object aan voor de Zumo32U4ButtonB en Zumo32U4LineSensors
 Zumo32U4ButtonB buttonB;
 Zumo32U4LineSensors lineSensors;
 
@@ -70,7 +69,6 @@ int LineSensors::checkLijnen() {
 
 // Methode om te zien hoe ver de zumo van de lijn is
 int LineSensors::berekenFout() {
-   // Voorbeeldlogica: stuur naar links als de zwartste sensor de linker is, rechts als rechter, anders rechtdoor
     if (DonkersteSensor == 0) {
         // links  ??Zumo32U4.rijd_vooruit(???);
     } 
