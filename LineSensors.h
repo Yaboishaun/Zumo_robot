@@ -11,6 +11,9 @@ private:
     int DonkersteSensor;
     int LSSensorwaarde;
     int LSKleur;
+    int LSKleur1;
+    int LSKleur2;
+    int status = 0;
 
 public:
     LineSensors(); // Constructor
