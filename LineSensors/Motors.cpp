@@ -5,8 +5,8 @@
 
 #define turnDelay 1050
 #define defaultDelay 800
-#define LINE_SENSOR_CENTER 500;
-LineSensors linesensor;
+#define LINE_SENSOR_CENTER 2000
+// LineSensors myLineSensors;
 
 const char encoderErrorLeft[] PROGMEM = "!<c2";
 const char encoderErrorRight[] PROGMEM = "!<e2";
@@ -15,13 +15,13 @@ Motors::Motors() : speedLeft(0), speedRight(0), userSpeed(0), maxSpeed(300), kp(
 
 }
 int Motors::speedBlack() {
-    maxSpeed = 300;  // Set the maximum speed for black lines
+    maxSpeed = 250;  // Set the maximum speed for black lines
     return maxSpeed;
 }
 
 int Motors::speedGreen() {
     delay(500);
-    maxSpeed = 200;  // Set the maximum speed for green lines
+    maxSpeed = 125;  // Set the maximum speed for green lines
     printSpeed();
     return maxSpeed; // Return the selected speed
 }
@@ -50,17 +50,40 @@ void Motors::handleUserCommands() {
   }
 }
 
-void Motors::lineFollow() {
-    int position = lineSensors.readLine(sensors); // Get the line position
+int Motors::lineFollow(int maxSpeed, int LineWaardes, int Serror) {
+  if ( Serror == 0){
+  Serial.println ("");
+    position = LineWaardes; // Get the line position
+    // Serial.print(lineSensors.readLine(sensors));
+    Serial.println ("Position: ");
+    Serial.print(position);
+    Serial.println (" ");
+    // delay(4000);
     int error = position - LINE_SENSOR_CENTER;
-
-    integral += error;
+    // Serial.print("dit is position ");
+    // Serial.print(position);
+    Serial.print("dit is error ");
+    Serial.print(error);
+    // Serial.print("dit is sensor center ");
+    // Serial.print(LINE_SENSOR_CENTER);
+    // Serial.print(" ");
+    // integral += error;
     int derivative = error - lastError;
+    // Serial.print("dit is derivative ");
+    // Serial.print(derivative);
+    // Serial.print("dit is last error ");
+    // Serial.print(lastError);
+    Serial.print(" dit is error: ");
+    Serial.print(error);
 
-    int adjustment = kp * error + ki * integral + kd * derivative;
+    // int adjustment = kp * error + ki * integral + kd * derivative;
+     int adjustment = error / 4;
 
-    speedLeft = maxSpeed - adjustment;
-    speedRight = maxSpeed + adjustment;
+    Serial.print("dit is adjustment ");
+    Serial.print(adjustment);
+    Serial.println ("");
+    speedLeft = maxSpeed + adjustment;
+    speedRight = maxSpeed - adjustment;
 
     // Ensure speeds are within bounds
     if (speedLeft > maxSpeed) speedLeft = maxSpeed;
@@ -69,8 +92,17 @@ void Motors::lineFollow() {
     if (speedRight < -maxSpeed) speedRight = -maxSpeed;
 
     motors.setSpeeds(speedLeft, speedRight);
-
+Serial.print(" dit is speed left ");
+    Serial.print(speedLeft);
+    Serial.println ("");
+    Serial.print(" dit is speed right ");
+    Serial.print(speedRight);
+    Serial.println ("");
     lastError = error;
+  }
+  if (Serror == 1){
+  straight();
+}
 }
 
 // Function to check for encoder errors

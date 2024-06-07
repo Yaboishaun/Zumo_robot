@@ -12,7 +12,7 @@ public:
     int speedGreen();
     void printSpeed();
     void handleUserCommands();
-    void lineFollow();
+    int lineFollow(int, int, int);
     void checkEncoderErrors();
     void readEncoderCounts();
     void turnRight();
@@ -37,6 +37,7 @@ private:
     bool errorRight;
     int countsLeft;
     int countsRight;
+    int position = 0;
     char report1[20];
     
     Zumo32U4Motors motors;
