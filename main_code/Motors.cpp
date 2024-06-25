@@ -111,8 +111,7 @@ void Motors::handleUserCommands() {
 }
 // Default functie voor rechts sturen.
 void Motors::turnRight() {
-  motors.setLeftSpeed(200);
-  motors.setRightSpeed(-200);
+  motors.setSpeeds(200, -200);
   delay(turnDelay);
   stop();
 }
