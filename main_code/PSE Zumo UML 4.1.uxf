@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>126</x>
+      <y>490</y>
+      <w>154</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>Zumo32U4IMU
+--
+- report: char
+--
++ getLastError(): uint8_t
++ init(): bool
++ getType(): Zumo32U4IMUType
++ enableDefault(): void
++ configureForTurnSensing(): void
++ configureForBalancing(): void
++ configureForFaceUphill(): void
++ writeReg(): void
++ readReg(): uint8_t
++ readAcc(): void
++ readGyro(): void
++ readMag(): void
++ read(): void
++ accDataReady(): bool
++ gyroDataReady(): bool
++ magDataReady(): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>637</y>
+      <w>154</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>mainZumo
+--
+int maxSpeed;                
+bool xbeeAansturing = false;  
+bool test;
+bool racen;
+bool xb;
+bool activeerProxy;
+Xbee xbe;
+--
++void setup();
++void loop();
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1428</x>
+      <y>392</y>
+      <w>196</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Zumo32U4Motors
+--
+
+--
++ Zumo32U4Motors()
++ setSpeeds(leftSpeed: int, rightSpeed: int)
++ setLeftSpeed(speed: int) 
++ setRightSpeed(speed: int) 
++ flipLeftMotor(flip: bool) 
++ flipRightMotor(flip: bool)  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>273</x>
+      <y>588</y>
+      <w>175</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt; gebruikt
+
+</panel_attributes>
+    <additional_attributes>230.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>791</x>
+      <y>546</y>
+      <w>252</w>
+      <h>371</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+Geeft route</panel_attributes>
+    <additional_attributes>270.0;10.0;270.0;500.0;10.0;500.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>133</y>
+      <w>154</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Xbee
+--
+-int data;
+-int info;
+-int infoMotorL;
+-int infoMotorR;
+-bool read = true;
+--
++Xbee();
++~Xbee();
++int printInfo();
++void converteer();
++void leesWaarde();</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>518</x>
+      <y>189</y>
+      <w>161</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>ProximitySensors 
+--
+-sensorThreshold = 5: const uint8_t 
+-leftValue uint8_t 
+-rightValue: uint8_t 
+-proxFrontActive: bool 
+-Readings[2] = {0, 0}: unsigned int 
+--
++ProxySensor();
++~ProxySensor();
++ setup(): void    
++bool zieObject();                               
++ printReadingsToSerial(): void  
++void turnRight();
++void turnLeft();
++void stop();    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>434</x>
+      <y>490</y>
+      <w>147</w>
+      <h>217</h>
+    </coordinates>
+    <panel_attributes>InertialSensors
+--
+-turnAngle45 : const uint
+-turnAngle90 : const uint
+-turnAngle1 : const uint
+-turnAngle : uint
+-turnRate : int16_t
+-gyroOffset : int16_t
+-gyroLastUpdate : uint16_t
+-microSeconds : uint16_t
+-deltaTime : uint16_t
+-deltaAngle : uint16_t
+-total : int
+--
++InertialSensor()
++Reset()
++Update()
++Setup()
++printReadings(uint16_t)
++calibrateGyro()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1106</x>
+      <y>406</y>
+      <w>189</w>
+      <h>448</h>
+    </coordinates>
+    <panel_attributes>Motors
+--
+-int speedLeft;
+-int speedRight;
+-int userSpeed;
+-int maxSnelh;
+-float kp = 0.29;
+-float kd = 0.55;
+-float ki = 0;
+-int error= 0;
+-int lastError;
+-int integral;
+-int command;
+-bool errorLeft;
+-bool errorRight;
+-int countsLeft;
+-int countsRight;
+-int position = 0;
+-char report1[20];
+-uint16_t sensors[3]
+--
+Motors();
++int speedBlack();
++int speedGreen();
++void printSpeed();
++void handleUserCommands();
++int lineFollow(int, int, bool);
++int lineFollow(int, int, bool, String);
++void turnRight();
++void turnLeft();
++void straight();
++void stop();
++void circleClockwise();
++void circleCounterClockwise();
++void Left();
++void Right();
++void HardLeft();
++void HardRight();
++void HardStraight();
++void Back();
++void HardBack();</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1288</x>
+      <y>420</y>
+      <w>154</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+gebruikt &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>644</x>
+      <y>868</y>
+      <w>154</w>
+      <h>287</h>
+    </coordinates>
+    <panel_attributes>LineSensors
+--
+-uint16_t LaatsteGelezenUitvoer;
+-uint16_t lineSensorValues[5];
+-int DonkersteSensor = 0;
+-int LSSensorwaarde;
+-int LSKleur  =0 ;
+-int LSKleur1 =0;
+-int LSKleur2 =0;
+-int LSKleur3 =0;
+-int LSKleur4 =0;
+-int status = 0;
+--
+LineSensors(); 
++int calibrateLineSensor();
++int startup();
++int checkWaardesLS();
++void printReadingsToSerial();
++int checkLijnen(bool &amp;allWhite);
++int berekenFout();
++String LSrouteVersturen();
++int KleurCheck();
++bool detectColor(int sensorIndex, unsigned int thresholdLow, unsigned int thresholdHigh);
++bool detectBrown();
++bool draaiLinks = false;
++bool draaiRechts = false;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1141</x>
+      <y>882</y>
+      <w>616</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>Zumo32U4LineSensors
+--
+
+--
++Zumo32U4LineSensors ()
++Zumo32U4LineSensors (uint8_t *pins, uint8_t numSensors, uint8_t emitterPin=SENSOR_LEDON)
++void initThreeSensors (uint8_t emitterPin=SENSOR_LEDON)
++void initFiveSensors (uint8_t emitterPin=SENSOR_LEDON)
++void init (uint8_t *pins, uint8_t numSensors, uint16_t timeout=2000, uint8_t emitterPin=SENSOR_LEDON)
++void init (unsigned char *pins, unsigned char numSensors, unsigned int timeout=2000, unsigned char emitterPin=QTR_NO_EMITTER_PIN)
++void read (unsigned int *sensor_values, unsigned char readMode=QTR_EMITTERS_ON)
++void emittersOff ()
++void emittersOn ()
++void calibrate (unsigned char readMode=QTR_EMITTERS_ON)
++void resetCalibration ()
++void readCalibrated (unsigned int *sensor_values, unsigned char readMode=QTR_EMITTERS_ON)
++int 	readLine (unsigned int *sensor_values, unsigned char readMode=QTR_EMITTERS_ON, unsigned char white_line=0)
++unsigned int* 	calibratedMinimumOn
++unsigned int* 	calibratedMaximumOn
++unsigned int* 	calibratedMinimumOff
++unsigned int* 	calibratedMaximumOff 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1288</x>
+      <y>679</y>
+      <w>224</w>
+      <h>217</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+gebruikt &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>931</x>
+      <y>266</y>
+      <w>105</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bestuurt handmatig
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>385</w>
+      <h>385</h>
+    </coordinates>
+    <panel_attributes> Zumo32U4ProximitySensors    
+--
+- pins: uint8_t*                                        
+- numSensors: uint8_t                                   
+- lineSensorEmitterPin: uint8_t 
+--
++ Zumo32U4ProximitySensors()                            
++ Zumo32U4ProximitySensors(pins: uint8_t*,              
+numSensors: uint8_t,                              
+ lineSensorEmitterPin: uint8_t = defaultLineSensorEmitterPin) 
+ + initThreeSensors(lineSensorEmitterPin: uint8_t = defaultLineSensorEmitterPin): void 
+ + initFrontSensor(lineSensorEmitterPin: uint8_t = defaultLineSensorEmitterPin): void  
+ + init(pins: uint8_t*, numSensors: uint8_t,             
+ lineSensorEmitterPin: uint8_t = defaultLineSensorEmitterPin): void 
++ getNumSensors(): uint8_t                              
++ setPeriod(period: uint16_t): void                     
++ setBrightnessLevels(levels: uint16_t*, levelCount: uint8_t): void 
++ setPulseOnTimeUs(pulseOnTimeUs: uint16_t): void       
++ setPulseOffTimeUs(pulseOffTimeUs: uint16_t): void     
++ getNumBrightnessLevels(): uint8_t                     
++ lineSensorEmittersOff(): void                         
++ pullupsOn(): void                                     
++ readBasic(sensorNumber: uint8_t): bool                
++ read(): void                                          
++ countsWithLeftLeds(sensorNumber: uint8_t): uint8_t    
++ countsWithRightLeds(sensorNumber: uint8_t): uint8_t   
++ countsLeftWithLeftLeds(): uint8_t                     
++ countsLeftWithRightLeds(): uint8_t                    
++ countsFrontWithLeftLeds(): uint8_t                    
++ countsFrontWithRightLeds(): uint8_t                   
++ countsRightWithLeftLeds(): uint8_t                    
++ countsRightWithRightLeds(): uint8_t                   
++ readBasicLeft(): bool                                 
++ readBasicFront(): bool                                
+readBasicRight(): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>567</y>
+      <w>224</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+Meet pitch voor</panel_attributes>
+    <additional_attributes>300.0;150.0;150.0;150.0;150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>322</y>
+      <w>203</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+Ziet opstakel voor</panel_attributes>
+    <additional_attributes>250.0;140.0;160.0;140.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>231</y>
+      <w>154</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt; gebruikt</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>791</x>
+      <y>833</y>
+      <w>329</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=5
+m2=1
+Geeft route</panel_attributes>
+    <additional_attributes>10.0;150.0;370.0;150.0;370.0;10.0;450.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>399</y>
+      <w>147</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>Switchmodus
+--
+-bool checkxb;
+-bool proxy;
+-bool BRace;
+-bool test;
+-bool activProxy;
+-String bruin;
+--
++Switchmodus();
++~SwitchModus();
++bool xbeeActive;
++bool ProxyActive(bool);
++bool ZumoRace(bool);
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>847</x>
+      <y>546</y>
+      <w>91</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+kiest modus voor
+</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>791</x>
+      <y>1022</y>
+      <w>364</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+gebruikt &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>987</x>
+      <y>189</y>
+      <w>252</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Activeert &gt;
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0;320.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>203</y>
+      <w>182</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt; Activeert
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>98</y>
+      <w>938</w>
+      <h>308</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Gebruikt &gt;</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;30.0;1320.0;20.0;1320.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>931</x>
+      <y>679</y>
+      <w>189</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>931</x>
+      <y>238</y>
+      <w>133</w>
+      <h>427</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;580.0;170.0;580.0;170.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>714</x>
+      <y>714</y>
+      <w>84</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+</diagram>
